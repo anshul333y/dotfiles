@@ -1,4 +1,4 @@
-. "$HOME/.config/nerdfetch/nerdfetch.sh"
+. "$HOME/.config/nerdfetch/nerdfetch"
 eval "$(starship init zsh)"
 
 export ZSH="$HOME/.oh-my-zsh"
