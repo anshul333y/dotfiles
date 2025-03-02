@@ -1,6 +1,4 @@
-import = [
-  "~/.config/alacritty/catppuccin-mocha.toml"
-]
+general.import = ["~/.config/alacritty/catppuccin-mocha.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -26,6 +24,7 @@ style = "Regular"
 
 [window]
 opacity = 0.9
+decorations = "None"
 
 [window.dimensions]
 columns = 140
