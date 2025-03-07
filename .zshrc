@@ -24,4 +24,3 @@ alias n="nvim"
 alias t="tmux"
 
 # path of installations
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
