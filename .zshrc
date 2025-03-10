@@ -19,6 +19,8 @@ alias gaa="git add --all"
 alias gd="git diff"
 
 # other alias
+alias po="poweroff"
+alias rb="reboot"
 alias e="exit"
 alias n="nvim"
 alias t="tmux"
