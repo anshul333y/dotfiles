@@ -22,6 +22,7 @@ alias gd="git diff"
 alias po="poweroff"
 alias rb="reboot"
 alias e="exit"
+alias c="clear"
 alias n="nvim"
 alias t="tmux"
 
