@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: JetBrainsMono Nerd Font, monospace;
+    font-family: CaskaydiaCove Nerd Font;
     font-weight: bold;
     font-size: 14px;
     min-height: 0;
@@ -55,7 +55,7 @@ window#waybar {
     margin: 3px 0px;
     margin-top: 5px;
     margin-bottom: 0px;
-    /* border: 1px solid #181825; */
+    border: 1px solid #181825;
 }
 
 #backlight {
