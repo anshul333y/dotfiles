@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download the font zip file
-wget -P ~/Downloads "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CascadiaCode.zip"
+curl -L -o ~/Downloads/CascadiaCode.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CascadiaCode.zip"
 
 # Unzip the font file
 unzip ~/Downloads/CascadiaCode.zip -d ~/Downloads/fonts
