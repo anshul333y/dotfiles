@@ -3,13 +3,10 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="random"
+ZSH_THEME_RANDOM_QUIET="true"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
-
-# nerdfetch & starship
-nerdfetch
-eval "$(starship init zsh)"
 
 # git alias
 alias gc="git commit -m"
