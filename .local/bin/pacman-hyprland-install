@@ -2,6 +2,6 @@
 
 sudo pacman -S hyprland kitty yazi wofi waybar swaync hyprpaper hypridle hyprlock bluez bluez-utils sddm
 
-sudo pacman -S polkit-gnome xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland
+sudo pacman -S polkit-gnome gnome-keyring xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland
 
 yay -S hyprshot
