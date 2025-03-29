@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S hyprland kitty nautilus wofi waybar swaync hyprpaper hypridle hyprlock bluez bluez-utils
+sudo pacman -S hyprland kitty yazi wofi waybar swaync hyprpaper hypridle hyprlock bluez bluez-utils
 
 sudo pacman -S polkit-gnome xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland
 
