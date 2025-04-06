@@ -4,4 +4,4 @@ sudo pacman -S hyprland kitty yazi rofi-wayland waybar swaync hyprpaper hypridle
 
 sudo pacman -S polkit-gnome gnome-keyring xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland
 
-yay -S hyprshot
+paru -S hyprshot
