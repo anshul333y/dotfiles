@@ -1,7 +1,11 @@
 #!/bin/bash
 
-sudo pacman -S hyprland kitty yazi rofi-wayland waybar swaync hyprpaper hypridle hyprlock bluez bluez-utils uwsm
+sudo pacman -S bluez bluez-utils
 
-sudo pacman -S polkit-gnome gnome-keyring xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland
+sudo pacman -S hyprland kitty yazi rofi waybar swaync hyprpaper hypridle hyprlock uwsm
+
+sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland
+
+sudo pacman -S polkit-gnome gnome-keyring
 
 paru -S hyprshot
