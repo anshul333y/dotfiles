@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git clone https://aur.archlinux.org/paru.git ~/Downloads/paru
+git clone https://aur.archlinux.org/paru-bin.git ~/Downloads/paru
 
 cd ~/Downloads/paru
 
