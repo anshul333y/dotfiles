@@ -1,0 +1,5 @@
+#!/bin/bash
+
+nmcli device disconnect wlan0
+
+nmcli device wifi connect anshul333y

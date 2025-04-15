@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bluetoothctl disconnect
+
+bluetoothctl connect C8:2A:DD:68:7A:D5
