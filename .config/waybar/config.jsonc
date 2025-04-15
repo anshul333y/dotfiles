@@ -13,30 +13,14 @@
     "modules-center": ["hyprland/window"],
     "modules-right": [
         "tray",
-        "memory",
-        "cpu",
         "network",
+        "cpu",
+        "memory",
         "battery",
         "backlight",
         "pulseaudio",
         "pulseaudio#microphone"
     ],
-
-    "hyprland/window": {
-        "format": "󰣇 {}"
-    },
-    
-    "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "on-click": "activate"
-        //"format": "{icon}",
-    },
-
-    "tray": {
-        "icon-size": 13,
-        "spacing": 10
-    },
 
     "clock": {
         "format": "{:%A    %B-%d-%Y    %I:%M %p}",
@@ -57,13 +41,54 @@
         }
     },
 
-    "backlight": {
-        "device": "intel_backlight",
-        "format": "{icon} {percent}%",
-        "format-icons": ["󰃞", "󰃟", "󰃠"],
-        "on-scroll-up": "brightnessctl set 5%+",
-        "on-scroll-down": "brightnessctl set 5%-",
-        "min-length": 6
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate"
+    },
+
+    "hyprland/window": {
+        "format": "anshul333y 󰣇  {}"
+    },
+ 
+    "tray": {
+        "icon-size": 13,
+        "spacing": 10
+    },
+
+    "network": {
+        "tooltip": true,
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀 ",
+        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "󰖪 ",
+        "tooltip-format-disconnected": "Disconnected",
+        "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
+        "interval": 2
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": "󰍛 {usage}%",
+        "format-alt": "{icon0}{icon1}{icon2}{icon3}",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    },
+
+    "memory": {
+        "states": {
+            "c": 90,
+            "h": 60,
+            "m": 30
+        },
+        "interval": 10,
+        "format": "󰾆 {percentage}%",
+        "format-m": "󰾅 {percentage}%",
+        "format-h": "󰓅 {percentage}%",
+        "format-c": " {percentage}%",
+        "format-alt": "󰾆 {used}GB",
+        "tooltip": true,
+        "tooltip-format": "󰾆 {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
     },
 
     "battery": {
@@ -77,6 +102,15 @@
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "min-length": 6
     },
 
     "pulseaudio": {
@@ -106,41 +140,5 @@
         "on-scroll-up": "wpctl set-volume @DEFAULT_SOURCE@ 5%+",
         "on-scroll-down": "wpctl set-volume @DEFAULT_SOURCE@ 5%-",
         "scroll-step": 5
-    },
-
-    "memory": {
-        "states": {
-            "c": 90, // critical
-            "h": 60, // high
-            "m": 30 // medium
-        },
-        "interval": 10,
-        "format": "󰾆 {percentage}%",
-        "format-m": "󰾅 {percentage}%",
-        "format-h": "󰓅 {percentage}%",
-        "format-c": " {percentage}%",
-        "format-alt": "󰾆 {used}GB",
-        "max-length": 10,
-        "tooltip": true,
-        "tooltip-format": "󰾆 {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
-    },
-
-    "cpu": {
-        "interval": 10,
-        "format": "󰍛 {usage}%",
-        "format-alt": "{icon0}{icon1}{icon2}{icon3}",
-        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
-    },
-
-    "network": {
-        "tooltip": true,
-        "format-wifi": "  {essid}",
-        "format-ethernet": "󰈀 ",
-        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
-        "format-linked": "󰈀 {ifname} (No IP)",
-        "format-disconnected": "󰖪 ",
-        "tooltip-format-disconnected": "Disconnected",
-        "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
-        "interval": 2
     }
 }
