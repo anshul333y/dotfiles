@@ -31,7 +31,6 @@ window#waybar {
     margin: 3px 0px;
     margin-top: 5px;
     margin-bottom: 0px;
-    /* border: 1px solid #181825; */
 }
 
 #clock {
@@ -85,6 +84,17 @@ window#waybar {
 
 #tray {
     border-radius: 10px;
+    margin-right: 10px;
+}
+
+#cpu {
+    color:  #a6adc8;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#memory {
+    color:#a6adc8;
+    border-radius: 0px 10px 10px 0px;
     margin-right: 10px;
 }
 
