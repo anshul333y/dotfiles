@@ -31,7 +31,7 @@ window#waybar {
     margin: 3px 0px;
     margin-top: 5px;
     margin-bottom: 0px;
-    border: 1px solid #181825;
+    /* border: 1px solid #181825; */
 }
 
 #clock {
