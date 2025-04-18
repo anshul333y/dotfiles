@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S bluez bluez-utils
+sudo pacman -S bluez bluez-utils ttf-droid
 
 sudo pacman -S hyprland kitty nautilus rofi waybar swaync hyprpaper hypridle hyprlock uwsm
 

@@ -108,8 +108,8 @@
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
-        "on-scroll-up": "brightnessctl set 5%+",
-        "on-scroll-down": "brightnessctl set 5%-",
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-",
         "min-length": 6
     },
 
@@ -118,8 +118,8 @@
         "tooltip": false,
         "format-muted": "  Muted",
         "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
-        "on-scroll-up": "wpctl set-volume @DEFAULT_SINK@ 5%+",
-        "on-scroll-down": "wpctl set-volume @DEFAULT_SINK@ 5%-",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_SINK@ 1%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_SINK@ 1%-",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
@@ -137,8 +137,8 @@
         "format-source": " {volume}%",
         "format-source-muted": "  Muted",
         "on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
-        "on-scroll-up": "wpctl set-volume @DEFAULT_SOURCE@ 5%+",
-        "on-scroll-down": "wpctl set-volume @DEFAULT_SOURCE@ 5%-",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_SOURCE@ 1%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_SOURCE@ 1%-",
         "scroll-step": 5
     }
 }
