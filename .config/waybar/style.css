@@ -1,3 +1,5 @@
+@import url("file:///home/anshul333y/.cache/wal/colors-waybar.css");
+
 * {
     border: none;
     border-radius: 0;
@@ -9,24 +11,20 @@
 
 window#waybar {
     background: rgba(21, 18, 27, 0);
-    color: #cdd6f4;
+    color: @foreground;
 }
 
 #clock,
 #workspaces,
-
 #window,
-
 #tray,
 #network,
 #cpu,
 #memory,
 #battery,
 #backlight,
-#pulseaudio
-
-{
-    background: #1e1e2e;
+#pulseaudio {
+    background: @color0;
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 5px;
@@ -34,14 +32,14 @@ window#waybar {
 }
 
 #clock {
-    color: #a6adc8;
-    border-radius: 10px 10px 10px 10px;
+    color: @color4;
+    border-radius: 10px;
     margin-left: 15px;
     border-right: 0px;
 }
 
 #workspaces {
-    background: #1e1e2e;
+    background: @color0;
     border-radius: 10px;
     margin-left: 10px;
     padding-right: 0px;
@@ -50,33 +48,34 @@ window#waybar {
 
 #workspaces button {
     padding: 5px;
-    color: #555869;
+    color: @color5;
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: @color4;
 }
 
 #workspaces button.focused {
-    color: #a6adc8;
-    background: #eba0ac;
+    color: @color4;
+    background: @color1;
     border-radius: 10px;
 }
 
 #workspaces button.urgent {
-    color: #11111b;
-    background: #a6e3a1;
+    color: @background;
+    background: @color2;
     border-radius: 10px;
 }
 
 #workspaces button:hover {
-    background: #cdd6f4;
-    color: #11111b; 
+    background: @foreground;
+    color: @background;
     border-radius: 10px;
 }
 
 #window {
+    color: @color4;
     border-radius: 10px;
     margin-left: 60px;
     margin-right: 60px;
@@ -88,33 +87,38 @@ window#waybar {
 }
 
 #cpu {
-    color:  #a6adc8;
+    color: @color4;
     border-radius: 10px 0px 0px 10px;
 }
 
 #memory {
-    color:#a6adc8;
+    color: @color4;
     border-radius: 0px 10px 10px 0px;
     margin-right: 10px;
 }
 
 #network {
-    color:  #a6adc8;
+    color: @color4;
     border-radius: 10px 0px 0px 10px;
 }
 
 #battery {
-    color:#a6adc8;
+    color: @color4;
     border-radius: 0px 10px 10px 0px;
     margin-right: 10px;
 }
 
 #backlight {
+    color: @color4;
     border-radius: 10px 0px 0px 10px;
 }
 
+#pulseaudio {
+    color: @color4;
+}
+
 #pulseaudio.microphone {
-    color: #a6adc8;
+    color: @color4;
     border-radius: 0px 10px 10px 0px;
     margin-right: 15px;
 }
