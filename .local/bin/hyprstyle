@@ -1,3 +1,5 @@
+# anshul333y's hyprstyle script
+
 #!/bin/bash
 
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
@@ -15,15 +17,18 @@ if [ ! -f "$WALLPAPER" ]; then
     exit 1
 fi
 
-# Generate colors with pywal
+# Pywal
 wal -i "$WALLPAPER" || {
     echo "pywal failed"
     exit 1
 }
 
-# Set wallpaper with hyprpaper
-CONFIG="$HOME/.cache/wal/hyprpaper.conf"
+# Hyprpaper
+CONFIG="$HOME/.config/hypr/hyprpaper.conf"
+
 cat >"$CONFIG" <<EOF
+# AUTO-GENERATED hyprpaper.conf from hyprstyle
+
 preload = $WALLPAPER
 wallpaper = eDP-1,$WALLPAPER
 EOF
@@ -32,33 +37,28 @@ pkill hyprpaper
 sleep 0.3
 nohup hyprpaper -c "$CONFIG" >/dev/null 2>&1 &
 
-# Restart waybar cleanly
+# Waybar
 pkill waybar
 (sleep 0.5 && waybar) >/dev/null 2>&1 &
 
-# Apply pywal color sequences for terminals
+# Kitty
 [[ -f "$HOME/.cache/wal/sequences" ]] && cat "$HOME/.cache/wal/sequences"
 
-# Update Hyprland border colors from pywal
-HYPR_COLORS="$HOME/.cache/wal/hyprcolors.conf"
+# Hyprland
+HYPR_COLORS="$HOME/.config/hypr/hyprcolors.conf"
 
-# Load pywal colors
 source "$HOME/.cache/wal/colors.sh"
 
-# Compose border colors with alpha and gradient angle
 ACTIVE_ALPHA="ff"
 INACTIVE_ALPHA="aa"
 ANGLE="45deg" # Angle for gradient
 
-# Ensure color values are in correct format (strip leading '#', if present)
 active_hex="${color4#\#}${ACTIVE_ALPHA}"
 inactive_hex="${color0#\#}${INACTIVE_ALPHA}"
 
-# Prepare rgba color strings (with hex values and angle)
 ACTIVE_BORDER="rgba(${active_hex})"
 INACTIVE_BORDER="rgba(${inactive_hex})"
 
-# Combine into the desired format
 cat >"$HYPR_COLORS" <<EOF
 general {
   col.active_border = $ACTIVE_BORDER $ACTIVE_BORDER $ANGLE
@@ -66,5 +66,99 @@ general {
 }
 EOF
 
-# Reload Hyprland config
 hyprctl reload
+
+# Hyprlock
+HYPRLOCK_CONF="$HOME/.config/hypr/hyprlock.conf"
+
+base="$color0"
+surface0="$color8"
+text="$color15"
+textAlpha="${text:1}120"
+mauve="$color5"
+mauveAlpha="${mauve:1}120"
+red="$color1"
+yellow="$color3"
+accent="$mauve"
+accentAlpha="$mauveAlpha"
+
+font="CaskaydiaCove Nerd Font"
+
+cat >"$HYPRLOCK_CONF" <<EOF
+# AUTO-GENERATED hyprlock.conf from hyprstyle
+
+# GENERAL
+general {
+    disable_loading_bar = true
+    hide_cursor = true
+}
+
+# BACKGROUND
+background {
+    monitor =
+    path = $WALLPAPER
+    blur_passes = 2
+    blur_size = 3
+    noise = true
+    color = rgba(${base:1:2}, ${base:3:2}, ${base:5:2}, 0.8)
+}
+
+# TIME
+label {
+    monitor =
+    text = cmd[update:30000] echo "$(date +"%R")"
+    color = $text
+    font_size = 90
+    font_family = $font
+    position = -30, 0
+    halign = right
+    valign = top
+}
+
+# DATE
+label {
+    monitor =
+    text = cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"
+    color = $text
+    font_size = 25
+    font_family = $font
+    position = -30, -150
+    halign = right
+    valign = top
+}
+
+# USER AVATAR
+image {
+    monitor = 
+    path = ~/.face
+    size = 100
+    border_color = $accent
+ 
+    position = 0, 75
+    halign = center
+    valign = center
+}
+
+# INPUT FIELD
+input-field {
+    monitor =
+    size = 300, 60
+    outline_thickness = 4
+    dots_size = 0.2
+    dots_spacing = 0.2
+    dots_center = true
+    outer_color = $accent
+    inner_color = $surface0
+    font_color = $text
+    fade_on_empty = false
+    placeholder_text = <span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>
+    hide_input = false
+    check_color = $accent
+    fail_color = $red
+    fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i>
+    capslock_color = $yellow
+    position = 0, -35
+    halign = center
+    valign = center
+}
+EOF
