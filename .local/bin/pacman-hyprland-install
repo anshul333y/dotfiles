@@ -2,7 +2,7 @@
 
 sudo pacman -S bluez bluez-utils ttf-droid
 
-sudo pacman -S hyprland kitty nautilus rofi waybar swaync hyprpaper hypridle hyprlock uwsm
+sudo pacman -S hyprland kitty yazi rofi waybar swaync hyprpaper hypridle hyprlock uwsm
 
 sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland
 
