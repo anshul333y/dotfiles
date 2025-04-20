@@ -1,0 +1,5 @@
+# ignoring auto generated files
+
+.config/hypr/hyprpaper.conf
+.config/hypr/hyprlock.conf
+.config/hypr/hyprcolors.conf
