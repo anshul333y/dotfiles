@@ -53,8 +53,8 @@ ACTIVE_ALPHA="ff"
 INACTIVE_ALPHA="aa"
 ANGLE="45deg" # Angle for gradient
 
-active_hex="${color4#\#}${ACTIVE_ALPHA}"
-inactive_hex="${color0#\#}${INACTIVE_ALPHA}"
+active_hex="${color15#\#}${ACTIVE_ALPHA}"
+inactive_hex="${color3#\#}${INACTIVE_ALPHA}"
 
 ACTIVE_BORDER="rgba(${active_hex})"
 INACTIVE_BORDER="rgba(${inactive_hex})"
