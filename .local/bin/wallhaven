@@ -4,10 +4,10 @@
 LIMIT=30
 SAVE_DIR="$HOME/Pictures/Wallpapers"
 RESOLUTION="1920x1080"
-CATEGORIES="111"    # General + Anime + People
-PURITY="0"          # SFW only
-SORTING="favorites" # 🎲 Random wallpapers
-ORDER="desc"        # Not used with 'random', but kept for completeness
+CATEGORIES="111" # General + Anime + People
+PURITY="0"       # SFW only
+SORTING="random" # 🎲 Random wallpapers
+ORDER="desc"     # Not used with 'random', but kept for completeness
 
 # Create directory if it doesn't exist
 mkdir -p "$SAVE_DIR"

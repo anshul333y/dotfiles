@@ -1,9 +1,19 @@
 #!/bin/bash
 
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | shuf -n 1)
 
-[ -z "$WALLPAPER" ] && echo "No wallpapers found!" && exit 1
+# Use argument as wallpaper if provided, otherwise pick a random one
+if [ -n "$1" ]; then
+    WALLPAPER="$1"
+else
+    WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | shuf -n 1)
+fi
+
+# Check if the wallpaper file exists
+if [ ! -f "$WALLPAPER" ]; then
+    echo "Wallpaper not found: $WALLPAPER"
+    exit 1
+fi
 
 # Generate colors with pywal
 wal -i "$WALLPAPER" || {
