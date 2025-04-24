@@ -1,6 +1,6 @@
-# anshul333y's hyprstyle script
-
 #!/bin/bash
+
+# anshul333y's hyprstyle script
 
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 

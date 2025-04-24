@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# anshul333y's ubuntustyle script
+
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+
+# Use argument as wallpaper if provided, otherwise pick a random one
+if [ -n "$1" ]; then
+    WALLPAPER="$1"
+else
+    WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | shuf -n 1)
+fi
+
+# Check if the wallpaper file exists
+if [ ! -f "$WALLPAPER" ]; then
+    echo "Wallpaper not found: $WALLPAPER"
+    exit 1
+fi
+
+# Pywal
+wal -i "$WALLPAPER" || {
+    echo "pywal failed"
+    exit 1
+}
+
+gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER"
