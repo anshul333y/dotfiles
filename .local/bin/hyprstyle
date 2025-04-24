@@ -41,9 +41,6 @@ nohup hyprpaper -c "$CONFIG" >/dev/null 2>&1 &
 pkill waybar
 (sleep 0.5 && waybar) >/dev/null 2>&1 &
 
-# Kitty
-[[ -f "$HOME/.cache/wal/sequences" ]] && cat "$HOME/.cache/wal/sequences"
-
 # Hyprland
 HYPR_COLORS="$HOME/.config/hypr/hyprcolors.conf"
 
