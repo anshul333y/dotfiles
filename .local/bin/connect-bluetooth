@@ -1,9 +1,5 @@
 #!/bin/bash
 
-nmcli device disconnect wlan0
-
-nmcli device wifi connect anshul333y
-
 bluetoothctl disconnect
 
 bluetoothctl connect C8:2A:DD:68:7A:D5
