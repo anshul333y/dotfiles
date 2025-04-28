@@ -4,8 +4,8 @@ sudo pacman -S bluez bluez-utils ttf-droid
 
 sudo pacman -S hyprland kitty yazi rofi-wayland waybar swaync hyprpaper hypridle hyprlock uwsm
 
-sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland
+sudo pacman -S xdg-desktop-portal-hyprland qt5-wayland qt6-wayland
 
-sudo pacman -S polkit-gnome gnome-keyring
+sudo pacman -S polkit-gnome gnome-keyring xdg-desktop-portal-gtk
 
 paru -S hyprshot
