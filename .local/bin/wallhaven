@@ -2,7 +2,7 @@
 
 # === Config ===
 LIMIT=100
-PARALLEL_JOBS=10
+PARALLEL_JOBS=5 # Keep low to avoid HTTP 429
 SAVE_DIR="$HOME/Pictures/Wallpapers"
 RESOLUTION="1920x1080"
 CATEGORIES="111" # General + Anime + People
@@ -14,13 +14,13 @@ mkdir -p "$SAVE_DIR"
 TMP_COUNTER=$(mktemp)
 echo 0 >"$TMP_COUNTER"
 
-# Trap cleanup
+# Cleanup lock/temp on exit
 cleanup() {
-    rm -f "$TMP_COUNTER"
+    rm -f "$TMP_COUNTER" "$TMP_COUNTER.lock"
 }
 trap cleanup EXIT
 
-# === Fetch URLs ===
+# === Fetch image URLs ===
 echo "📡 Fetching random wallpapers from Wallhaven..."
 IMAGE_URLS=()
 PAGE=1
@@ -41,7 +41,7 @@ done
 IMAGE_URLS=("${IMAGE_URLS[@]:0:$LIMIT}")
 export SAVE_DIR TMP_COUNTER LIMIT
 
-# === Global progress bar ===
+# === Progress bar updater ===
 print_progress() {
     while true; do
         COUNT=$(<"$TMP_COUNTER")
@@ -56,11 +56,19 @@ print_progress() {
     echo -e "\n✅ Download complete! Saved to: $SAVE_DIR"
 }
 
-# === Download function ===
+# === Download one image ===
 download_image() {
     URL="$1"
     FILENAME=$(basename "$URL")
-    curl -s "$URL" -o "$SAVE_DIR/$FILENAME"
+
+    # Small random delay to avoid rate-limiting
+    sleep 0.$((RANDOM % 5 + 1))
+
+    # Attempt download with retry
+    curl -s --retry 3 --retry-delay 2 --fail "$URL" -o "$SAVE_DIR/$FILENAME" ||
+        echo "❌ Failed: $FILENAME"
+
+    # Safely increment shared counter
     (
         flock 200
         COUNT=$(<"$TMP_COUNTER")
@@ -70,7 +78,7 @@ download_image() {
 
 export -f download_image
 
-# === Launch progress bar and downloads ===
+# === Run downloads with shared progress ===
 print_progress &
 PROGRESS_PID=$!
 
