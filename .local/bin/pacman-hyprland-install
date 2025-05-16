@@ -8,4 +8,4 @@ sudo pacman -S yazi uwsm xdg-desktop-portal-hyprland qt5-wayland qt6-wayland
 
 sudo pacman -S polkit-gnome gnome-keyring xdg-desktop-portal-gtk
 
-paru -S hyprshot
+paru -S hyprshot python-pywalfox
