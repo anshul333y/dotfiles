@@ -11,9 +11,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting you-should-use)
 source $ZSH/oh-my-zsh.sh
 
 # alias
-alias po="poweroff"
-alias rb="reboot"
-alias hi="sudo systemctl hibernate"
+alias e="exit"
 alias n="nvim"
 alias t="tmux"
 alias d="docker"

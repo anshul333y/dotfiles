@@ -19,7 +19,8 @@
         "battery",
         "backlight",
         "pulseaudio",
-        "pulseaudio#microphone"
+        "pulseaudio#microphone",
+        "custom/wlogout"
     ],
 
     "clock": {
@@ -140,5 +141,12 @@
         "on-scroll-up": "wpctl set-volume @DEFAULT_SOURCE@ 1%+",
         "on-scroll-down": "wpctl set-volume @DEFAULT_SOURCE@ 1%-",
         "scroll-step": 5
+    },
+
+    "custom/wlogout": {
+        "format": "⏻",
+        "tooltip": "Logout",
+        "on-click": "wlogout",
+        "interval": 9999999
     }
 }
