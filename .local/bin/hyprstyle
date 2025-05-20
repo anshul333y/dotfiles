@@ -57,6 +57,8 @@ ACTIVE_BORDER="rgba(${active_hex})"
 INACTIVE_BORDER="rgba(${inactive_hex})"
 
 cat >"$HYPR_COLORS" <<EOF
+# AUTO-GENERATED hyprcolors.conf from hyprstyle
+
 general {
   col.active_border = $ACTIVE_BORDER $ACTIVE_BORDER $ANGLE
   col.inactive_border = $INACTIVE_BORDER
@@ -100,10 +102,10 @@ background {
     color = rgba(${base:1:2}, ${base:3:2}, ${base:5:2}, 0.8)
 }
 
-# TIME
+# TIME (updates every minute)
 label {
     monitor =
-    text = cmd[update:30000] echo "$(date +"%R")"
+    text = cmd[update:60000] date +"%R"
     color = $text
     font_size = 90
     font_family = $font
@@ -112,10 +114,10 @@ label {
     valign = top
 }
 
-# DATE
+# DATE (updates every 12 hours)
 label {
     monitor =
-    text = cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"
+    text = cmd[update:43200000] date +"%A, %d %B %Y"
     color = $text
     font_size = 25
     font_family = $font
@@ -126,11 +128,10 @@ label {
 
 # USER AVATAR
 image {
-    monitor = 
+    monitor =
     path = ~/.face
     size = 100
     border_color = $accent
- 
     position = 0, 75
     halign = center
     valign = center
@@ -152,7 +153,7 @@ input-field {
     hide_input = false
     check_color = $accent
     fail_color = $red
-    fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i>
+    fail_text = <i>\$FAIL <b>(\$ATTEMPTS)</b></i>
     capslock_color = $yellow
     position = 0, -35
     halign = center
