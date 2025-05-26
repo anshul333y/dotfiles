@@ -6,21 +6,21 @@ WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 
 # Use argument as wallpaper if provided, otherwise pick a random one
 if [ -n "$1" ]; then
-    WALLPAPER="$1"
+  WALLPAPER="$1"
 else
-    WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | shuf -n 1)
+  WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | shuf -n 1)
 fi
 
 # Check if the wallpaper file exists
 if [ ! -f "$WALLPAPER" ]; then
-    echo "Wallpaper not found: $WALLPAPER"
-    exit 1
+  echo "Wallpaper not found: $WALLPAPER"
+  exit 1
 fi
 
 # Pywal
 wal -i "$WALLPAPER" || {
-    echo "pywal failed"
-    exit 1
+  echo "pywal failed"
+  exit 1
 }
 
 # Hyprpaper
@@ -50,8 +50,8 @@ ACTIVE_ALPHA="ff"
 INACTIVE_ALPHA="aa"
 ANGLE="45deg" # Angle for gradient
 
-active_hex="${color15#\#}${ACTIVE_ALPHA}"
-inactive_hex="${color3#\#}${INACTIVE_ALPHA}"
+active_hex="${color5#\#}${ACTIVE_ALPHA}"
+inactive_hex="${color8#\#}${INACTIVE_ALPHA}"
 
 ACTIVE_BORDER="rgba(${active_hex})"
 INACTIVE_BORDER="rgba(${inactive_hex})"
