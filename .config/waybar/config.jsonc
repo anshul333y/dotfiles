@@ -8,7 +8,8 @@
     "height": 0,
     "modules-left": [
         "clock",
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "custom/pacman-updates"
     ],
     "modules-center": ["hyprland/window"],
     "modules-right": [
@@ -46,6 +47,13 @@
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate"
+    },
+
+    "custom/pacman-updates": {
+      "exec": "~/.local/bin/pacman-updates",
+      "interval": 600,
+      "return-type": "json",
+      "format": "{}"
     },
 
     "hyprland/window": {
@@ -109,8 +117,8 @@
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
-        "on-scroll-up": "brightnessctl set 1%+",
-        "on-scroll-down": "brightnessctl set 1%-",
+        "on-scroll-up": "~/.local/bin/backlight up",
+        "on-scroll-down": "~/.local/bin/backlight down",
         "min-length": 6
     },
 
@@ -118,9 +126,9 @@
         "format": "{icon}  {volume}%",
         "tooltip": false,
         "format-muted": "  Muted",
-        "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
-        "on-scroll-up": "wpctl set-volume @DEFAULT_SINK@ 1%+",
-        "on-scroll-down": "wpctl set-volume @DEFAULT_SINK@ 1%-",
+        "on-click": "~/.local/bin/volume mute",
+        "on-scroll-up": "~/.local/bin/volume up",
+        "on-scroll-down": "~/.local/bin/volume down",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",

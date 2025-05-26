@@ -1,11 +1,9 @@
 #!/bin/bash
 
-sudo pacman -S bluez bluez-utils ttf-droid
+sudo pacman -S bluez bluez-utils ttf-droid polkit-gnome gnome-keyring cronie acpi git openssh
 
-sudo pacman -S hyprland kitty rofi-wayland waybar swaync hyprpaper hypridle hyprlock
+sudo pacman -S uwsm xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xdg-desktop-portal-gtk
 
-sudo pacman -S yazi uwsm xdg-desktop-portal-hyprland qt5-wayland qt6-wayland
+sudo pacman -S hyprland kitty yazi rofi-wayland waybar dunst hyprpaper hypridle hyprlock firefox nvim
 
-sudo pacman -S polkit-gnome gnome-keyring xdg-desktop-portal-gtk
-
-paru -S hyprshot wlogout
+paru -S hyprshot wlogout google-chrome visual-studio-code-bin spotify-adblock-git postman-bin
