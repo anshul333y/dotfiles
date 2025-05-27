@@ -3,7 +3,7 @@
 # === Config ===
 LIMIT=100
 PARALLEL_JOBS=5 # Keep low to avoid HTTP 429
-SAVE_DIR="$HOME/Pictures/Wallpapers"
+SAVE_DIR="$HOME/Pictures/Save"
 RESOLUTION="1920x1080"
 CATEGORIES="111" # General + Anime + People
 PURITY="0"       # SFW only
@@ -16,7 +16,7 @@ echo 0 >"$TMP_COUNTER"
 
 # Cleanup lock/temp on exit
 cleanup() {
-    rm -f "$TMP_COUNTER" "$TMP_COUNTER.lock"
+  rm -f "$TMP_COUNTER" "$TMP_COUNTER.lock"
 }
 trap cleanup EXIT
 
@@ -26,16 +26,16 @@ IMAGE_URLS=()
 PAGE=1
 
 while [ "${#IMAGE_URLS[@]}" -lt "$LIMIT" ]; do
-    RESPONSE=$(curl -sG "https://wallhaven.cc/api/v1/search" \
-        --data-urlencode "categories=$CATEGORIES" \
-        --data-urlencode "purity=$PURITY" \
-        --data-urlencode "resolutions=$RESOLUTION" \
-        --data-urlencode "sorting=$SORTING" \
-        --data-urlencode "page=$PAGE")
+  RESPONSE=$(curl -sG "https://wallhaven.cc/api/v1/search" \
+    --data-urlencode "categories=$CATEGORIES" \
+    --data-urlencode "purity=$PURITY" \
+    --data-urlencode "resolutions=$RESOLUTION" \
+    --data-urlencode "sorting=$SORTING" \
+    --data-urlencode "page=$PAGE")
 
-    NEW_URLS=($(echo "$RESPONSE" | jq -r '.data[].path'))
-    IMAGE_URLS+=("${NEW_URLS[@]}")
-    ((PAGE++))
+  NEW_URLS=($(echo "$RESPONSE" | jq -r '.data[].path'))
+  IMAGE_URLS+=("${NEW_URLS[@]}")
+  ((PAGE++))
 done
 
 IMAGE_URLS=("${IMAGE_URLS[@]:0:$LIMIT}")
@@ -43,37 +43,37 @@ export SAVE_DIR TMP_COUNTER LIMIT
 
 # === Progress bar updater ===
 print_progress() {
-    while true; do
-        COUNT=$(<"$TMP_COUNTER")
-        PERCENT=$((COUNT * 100 / LIMIT))
-        DONE=$((PERCENT / 2))
-        BAR=$(printf "%-${DONE}s" "#" | tr ' ' '#')
-        BAR=$(printf "%-50s" "$BAR" | tr ' ' '.')
-        echo -ne "\r[${BAR}] $COUNT/$LIMIT"
-        [[ "$COUNT" -ge "$LIMIT" ]] && break
-        sleep 0.5
-    done
-    echo -e "\n✅ Download complete! Saved to: $SAVE_DIR"
+  while true; do
+    COUNT=$(<"$TMP_COUNTER")
+    PERCENT=$((COUNT * 100 / LIMIT))
+    DONE=$((PERCENT / 2))
+    BAR=$(printf "%-${DONE}s" "#" | tr ' ' '#')
+    BAR=$(printf "%-50s" "$BAR" | tr ' ' '.')
+    echo -ne "\r[${BAR}] $COUNT/$LIMIT"
+    [[ "$COUNT" -ge "$LIMIT" ]] && break
+    sleep 0.5
+  done
+  echo -e "\n✅ Download complete! Saved to: $SAVE_DIR"
 }
 
 # === Download one image ===
 download_image() {
-    URL="$1"
-    FILENAME=$(basename "$URL")
+  URL="$1"
+  FILENAME=$(basename "$URL")
 
-    # Small random delay to avoid rate-limiting
-    sleep 0.$((RANDOM % 5 + 1))
+  # Small random delay to avoid rate-limiting
+  sleep 0.$((RANDOM % 5 + 1))
 
-    # Attempt download with retry
-    curl -s --retry 3 --retry-delay 2 --fail "$URL" -o "$SAVE_DIR/$FILENAME" ||
-        echo "❌ Failed: $FILENAME"
+  # Attempt download with retry
+  curl -s --retry 3 --retry-delay 2 --fail "$URL" -o "$SAVE_DIR/$FILENAME" ||
+    echo "❌ Failed: $FILENAME"
 
-    # Safely increment shared counter
-    (
-        flock 200
-        COUNT=$(<"$TMP_COUNTER")
-        echo $((COUNT + 1)) >"$TMP_COUNTER"
-    ) 200>"$TMP_COUNTER.lock"
+  # Safely increment shared counter
+  (
+    flock 200
+    COUNT=$(<"$TMP_COUNTER")
+    echo $((COUNT + 1)) >"$TMP_COUNTER"
+  ) 200>"$TMP_COUNTER.lock"
 }
 
 export -f download_image
@@ -85,3 +85,7 @@ PROGRESS_PID=$!
 printf "%s\n" "${IMAGE_URLS[@]}" | xargs -n 1 -P "$PARALLEL_JOBS" bash -c 'download_image "$0"'
 
 wait $PROGRESS_PID
+
+sxiv -t ~/Pictures/Save/*
+
+mv ~/Pictures/Save/* ~/Pictures/Wallpapers
