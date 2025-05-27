@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S bluez bluez-utils ttf-droid polkit-gnome gnome-keyring cronie acpi git openssh
+sudo pacman -S bluez bluez-utils ttf-droid polkit-gnome gnome-keyring cronie acpi git openssh pacman-contrib
 
 sudo pacman -S uwsm xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xdg-desktop-portal-gtk
 

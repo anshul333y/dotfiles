@@ -80,6 +80,7 @@ window#waybar {
     margin-top: 5px;
     margin-bottom: 0px;
     background: @color0;
+    color: @color4;
     border-radius: 10px;
     margin-left: 10px;
 }
