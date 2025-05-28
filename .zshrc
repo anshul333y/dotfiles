@@ -2,6 +2,7 @@
 
 # path of user bin
 export PATH="$HOME/.local/bin:$PATH"
+export EDITOR=nvim
 
 # oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
@@ -15,8 +16,3 @@ alias e="exit"
 alias n="nvim"
 alias t="tmux"
 alias d="docker"
-
-# path of installations
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
-export EDITOR=nvim
