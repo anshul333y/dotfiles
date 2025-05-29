@@ -50,7 +50,7 @@
     },
 
     "custom/pacman-updates": {
-      "exec": "~/.local/bin/pacman-updates",
+      "exec": "~/.local/bin/notify-pacman-updates",
       "interval": 600,
       "return-type": "json",
       "format": "{}"
