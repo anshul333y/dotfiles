@@ -3,5 +3,6 @@
 while read file; do
   case $1 in
   "d") mv $file ~/.local/share/Trash ;;
+  "t") ~/.local/bin/hyprstyle $file ;;
   esac
 done
