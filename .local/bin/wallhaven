@@ -21,8 +21,8 @@ fi
 SAVE_DIR="$HOME/Pictures/save"
 WALLPAPER_DIR="$HOME/Pictures/wall"
 RESOLUTION="1920x1080"
-CATEGORIES="111" # All categories
-PURITY="111"     # All purity levels
+CATEGORIES="111" # General, Anime, and People
+PURITY="100"     # SFW only
 ORDER="desc"     # Default order
 MAX_PAGES=2
 
