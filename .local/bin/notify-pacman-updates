@@ -1,17 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
-# Script for use in waybar to display # of pacman updates
+# Waybar update check script using checkupdates and paru
+# Requires: pacman-contrib, paru
 
-OUTPUT="$(checkupdates)"
+# Get Pacman updates
+PACMAN_UPDATES=$(checkupdates 2>/dev/null)
+PAC_COUNT=$(echo "$PACMAN_UPDATES" | grep -c '^[^[:space:]]')
 
-if [ -z "$OUTPUT" ]; then
+# Get AUR updates
+AUR_UPDATES=$(paru -Qum --aur 2>/dev/null)
+AUR_COUNT=$(echo "$AUR_UPDATES" | grep -c '^[^[:space:]]')
+
+TOTAL_UPDATES=$((PAC_COUNT + AUR_COUNT))
+
+if [ "$TOTAL_UPDATES" -eq 0 ]; then
   exit 0
 else
-  NUMBER="$(echo "$OUTPUT" | wc -l)"
   TEXT="󰏔"
-
-  TOOLTIP="$NUMBER updates found"
-
-  echo "{\"text\":\"""$TEXT""\", \"tooltip\":\"""$TOOLTIP""\"}"
+  TOOLTIP="$TOTAL_UPDATES updates found ($PAC_COUNT pacman, $AUR_COUNT AUR)"
+  TOOLTIP_ESCAPED=$(echo "$TOOLTIP" | sed 's/"/\\"/g')
+  echo "{\"text\":\"$TEXT\", \"tooltip\":\"$TOOLTIP_ESCAPED\"}"
   exit 0
 fi
