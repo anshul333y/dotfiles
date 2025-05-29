@@ -6,6 +6,6 @@ sudo pacman -S xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xdg-desktop-p
 
 sudo pacman -S hyprland kitty rofi-wayland waybar dunst hyprpaper hypridle hyprlock firefox
 
-sudo pacman -S nvim lazygit fzf ripgrep fd sxiv mpv wl-clipboard ttf-droid ttf-cascadia-code
+sudo pacman -S nvim lazygit fzf ripgrep fd sxiv mpv wl-clipboard ttf-droid ttf-cascadia-code-nerd
 
 paru -S hyprshot wlogout google-chrome visual-studio-code-bin spotify-adblock-git postman-bin
