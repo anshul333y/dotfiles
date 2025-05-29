@@ -1,91 +1,112 @@
 #!/bin/bash
 
+# === Load environment variables from .env ===
+ENV_FILE="$(dirname "$0")/../../.env"
+
+if [ -f "$ENV_FILE" ]; then
+  set -a
+  source "$ENV_FILE"
+  set +a
+else
+  echo "❌ .env file not found. Please create one."
+fi
+
+API_KEY="$WALLHAVEN_API_KEY"
+
+if [ -z "$API_KEY" ]; then
+  echo "❌ WALLHAVEN_API_KEY not set in .env file."
+fi
+
 # === Config ===
-LIMIT=100
-PARALLEL_JOBS=5 # Keep low to avoid HTTP 429
-SAVE_DIR="$HOME/Pictures/Save"
+SAVE_DIR="$HOME/Pictures/save"
+WALLPAPER_DIR="$HOME/Pictures/wall"
 RESOLUTION="1920x1080"
-CATEGORIES="111" # General + Anime + People
-PURITY="0"       # SFW only
-SORTING="random" # Random wallpapers
+CATEGORIES="111" # All categories
+PURITY="111"     # All purity levels
+ORDER="desc"     # Default order
+MAX_PAGES=2
 
-# === Setup ===
+# Prompt for sorting
+echo "Choose sorting option:"
+echo "1) random"
+echo "2) relevance"
+echo "3) date_added"
+echo "4) views"
+echo "5) favorites"
+echo "6) toplist"
+
+read -p "Enter choice [1-6]: " sort_choice
+case "$sort_choice" in
+1) SORTING="random" ;;
+2) SORTING="relevance" ;;
+3) SORTING="date_added" ;;
+4) SORTING="views" ;;
+5) SORTING="favorites" ;;
+6) SORTING="toplist" ;;
+*)
+  echo "Invalid choice. Defaulting to 'random'."
+  SORTING="random"
+  ;;
+esac
+
 mkdir -p "$SAVE_DIR"
-TMP_COUNTER=$(mktemp)
-echo 0 >"$TMP_COUNTER"
+mkdir -p "$WALLPAPER_DIR"
 
-# Cleanup lock/temp on exit
-cleanup() {
-  rm -f "$TMP_COUNTER" "$TMP_COUNTER.lock"
-}
-trap cleanup EXIT
-
-# === Fetch image URLs ===
-echo "📡 Fetching random wallpapers from Wallhaven..."
 IMAGE_URLS=()
 PAGE=1
 
-while [ "${#IMAGE_URLS[@]}" -lt "$LIMIT" ]; do
+echo "📡 Fetching wallpapers..."
+
+while [ "$PAGE" -le "$MAX_PAGES" ]; do
   RESPONSE=$(curl -sG "https://wallhaven.cc/api/v1/search" \
+    --data-urlencode "apikey=$API_KEY" \
     --data-urlencode "categories=$CATEGORIES" \
     --data-urlencode "purity=$PURITY" \
     --data-urlencode "resolutions=$RESOLUTION" \
     --data-urlencode "sorting=$SORTING" \
+    --data-urlencode "order=$ORDER" \
     --data-urlencode "page=$PAGE")
 
   NEW_URLS=($(echo "$RESPONSE" | jq -r '.data[].path'))
+
+  if [ ${#NEW_URLS[@]} -eq 0 ]; then
+    echo "No more wallpapers found."
+    break
+  fi
+
   IMAGE_URLS+=("${NEW_URLS[@]}")
   ((PAGE++))
 done
 
-IMAGE_URLS=("${IMAGE_URLS[@]:0:$LIMIT}")
-export SAVE_DIR TMP_COUNTER LIMIT
+TOTAL=${#IMAGE_URLS[@]}
+COUNT=0
 
-# === Progress bar updater ===
-print_progress() {
-  while true; do
-    COUNT=$(<"$TMP_COUNTER")
-    PERCENT=$((COUNT * 100 / LIMIT))
-    DONE=$((PERCENT / 2))
-    BAR=$(printf "%-${DONE}s" "#" | tr ' ' '#')
-    BAR=$(printf "%-50s" "$BAR" | tr ' ' '.')
-    echo -ne "\r[${BAR}] $COUNT/$LIMIT"
-    [[ "$COUNT" -ge "$LIMIT" ]] && break
-    sleep 0.5
-  done
-  echo -e "\n✅ Download complete! Saved to: $SAVE_DIR"
-}
+echo "⬇️ Downloading $TOTAL wallpapers..."
 
-# === Download one image ===
-download_image() {
-  URL="$1"
+for URL in "${IMAGE_URLS[@]}"; do
+  ((COUNT++))
   FILENAME=$(basename "$URL")
 
-  # Small random delay to avoid rate-limiting
-  sleep 0.$((RANDOM % 5 + 1))
+  # Download with retry
+  curl -s --retry 3 --retry-delay 2 --fail "$URL" -o "$SAVE_DIR/$FILENAME" >/dev/null
 
-  # Attempt download with retry
-  curl -s --retry 3 --retry-delay 2 --fail "$URL" -o "$SAVE_DIR/$FILENAME" ||
-    echo "❌ Failed: $FILENAME"
+  # Calculate progress
+  PERCENT=$((COUNT * 100 / TOTAL))
+  FILLED=$((PERCENT / 2))
+  EMPTY=$((50 - FILLED))
 
-  # Safely increment shared counter
-  (
-    flock 200
-    COUNT=$(<"$TMP_COUNTER")
-    echo $((COUNT + 1)) >"$TMP_COUNTER"
-  ) 200>"$TMP_COUNTER.lock"
-}
+  BAR=$(printf "%0.s#" $(seq 1 $FILLED))
+  BAR+=$(printf "%0.s." $(seq 1 $EMPTY))
 
-export -f download_image
+  echo -ne "\rProgress: [${BAR}] $PERCENT% ($COUNT/$TOTAL)"
+done
 
-# === Run downloads with shared progress ===
-print_progress &
-PROGRESS_PID=$!
+echo -e "✅ Download complete! Saved to: $SAVE_DIR"
+echo "✅ Previewing wallpapers..."
 
-printf "%s\n" "${IMAGE_URLS[@]}" | xargs -n 1 -P "$PARALLEL_JOBS" bash -c 'download_image "$0"'
+sxiv -t "$SAVE_DIR"/*
 
-wait $PROGRESS_PID
+echo "Moving wallpapers to final folder..."
+mv "$SAVE_DIR"/* "$WALLPAPER_DIR"
 
-sxiv -t ~/Pictures/Save/*
-
-mv ~/Pictures/Save/* ~/Pictures/Wallpapers
+echo "Done! Wallpapers are in $WALLPAPER_DIR"

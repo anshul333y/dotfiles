@@ -2,7 +2,7 @@
 
 # anshul333y's hyprstyle script
 
-WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+WALLPAPER_DIR="$HOME/Pictures/wall"
 
 # Use argument as wallpaper if provided, otherwise pick a random one
 if [ -n "$1" ]; then
@@ -105,7 +105,7 @@ background {
 # TIME (updates every minute)
 label {
     monitor =
-    text = cmd[update:60000] date +"%R"
+    text = cmd[update:60000] date +"%I:%M %p"
     color = $text
     font_size = 90
     font_family = $font
@@ -119,7 +119,7 @@ label {
     monitor =
     text = cmd[update:43200000] date +"%A, %d %B %Y"
     color = $text
-    font_size = 25
+    font_size = 30
     font_family = $font
     position = -30, -150
     halign = right
@@ -130,9 +130,9 @@ label {
 image {
     monitor =
     path = ~/.face
-    size = 100
+    size = 300
     border_color = $accent
-    position = 0, 75
+    position = 0, 150
     halign = center
     valign = center
 }
@@ -140,7 +140,7 @@ image {
 # INPUT FIELD
 input-field {
     monitor =
-    size = 300, 60
+    size = 350, 60
     outline_thickness = 4
     dots_size = 0.2
     dots_spacing = 0.2
@@ -155,7 +155,7 @@ input-field {
     fail_color = $red
     fail_text = <i>\$FAIL <b>(\$ATTEMPTS)</b></i>
     capslock_color = $yellow
-    position = 0, -35
+    position = 0, -100
     halign = center
     valign = center
 }
