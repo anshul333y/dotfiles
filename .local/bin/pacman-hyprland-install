@@ -4,7 +4,7 @@ sudo pacman -S bluez bluez-utils cronie brightnessctl acpi pacman-contrib ttf-dr
 
 sudo pacman -S xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xdg-desktop-portal-gtk python-pywal
 
-sudo pacman -S hyprland kitty rofi-wayland waybar dunst hyprpaper hypridle hyprlock firefox
+sudo pacman -S hyprland kitty rofi-wayland waybar dunst hyprpaper hypridle hyprlock firefox tmux flatpak
 
 sudo pacman -S nvim lazygit fzf ripgrep fd sxiv mpv wl-clipboard uwsm zsh polkit-gnome gnome-keyring
 
