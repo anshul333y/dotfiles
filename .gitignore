@@ -4,4 +4,10 @@
 .config/hypr/hyprcolors.conf
 
 # ignoring .env files
-.env
+.local/.env
+
+# ignoring tmux plugins
+.config/tmux/plugins
+
+# ignoring zsh system files
+.config/zsh/.zcompdump*
