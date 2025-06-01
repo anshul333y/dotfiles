@@ -18,8 +18,8 @@ if [ -z "$API_KEY" ]; then
 fi
 
 # === Config ===
-SAVE_DIR="$HOME/Pictures/save"
-WALLPAPER_DIR="$HOME/Pictures/wall"
+SAVE_DIR="$HOME/pics/save"
+WALLPAPER_DIR="$HOME/pics/wall"
 RESOLUTION="1920x1080"
 CATEGORIES="111" # General, Anime, and People
 PURITY="100"     # SFW only
