@@ -1,8 +1,8 @@
-theme = catppuccin-mocha
+theme = "/home/anshul333y/.cache/wal/colors-ghostty"
 font-family = CaskaydiaCove Nerd Font
 font-size = 15
 
-background-opacity = 0.9
+background-opacity = 0.8
 gtk-titlebar = false
 window-width=138
 window-height=38

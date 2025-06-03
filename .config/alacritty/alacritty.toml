@@ -1,4 +1,5 @@
-general.import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+[general]
+import = ["~/.cache/wal/colors-alacritty.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -23,7 +24,7 @@ family = "CaskaydiaCove Nerd Font"
 style = "Regular"
 
 [window]
-opacity = 0.9
+opacity = 0.8
 decorations = "None"
 
 [window.dimensions]
