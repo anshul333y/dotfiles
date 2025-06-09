@@ -10,6 +10,8 @@ sudo pacman -S wl-clipboard uwsm zsh tmux nvim lazygit fzf ripgrep fd sxiv mpv p
 
 sudo pacman -S ttf-droid ttf-cascadia-code-nerd xdg-user-dirs telegram-desktop discord
 
-paru -S hyprshot-git wlogout-git spotify-adblock-git google-chrome visual-studio-code-bin postman-bin
+paru -S hyprshot-git wlogout-git spotify-adblock-git google-chrome brave-bin
+
+paru -S visual-studio-code-bin postman-bin
 
 sudo pacman -S gcc python python-pip nodejs npm docker
