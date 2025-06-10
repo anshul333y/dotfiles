@@ -5,10 +5,6 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE="$HOME/.local/share/zsh_history"
 
-# path of user bin
-export PATH="$HOME/.local/bin:$PATH"
-export EDITOR=nvim
-
 # oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="random"
