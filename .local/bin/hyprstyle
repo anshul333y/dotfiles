@@ -65,6 +65,7 @@ general {
 }
 EOF
 
+gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER"
 hyprctl reload
 
 # Hyprlock

@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # Download the font zip file
-curl -Lo ~/Downloads/CascadiaCode.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CascadiaCode.zip"
+curl -Lo ~/dl/CascadiaCode.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CascadiaCode.zip"
 
 # Unzip the font file
-unzip ~/Downloads/CascadiaCode.zip -d ~/Downloads/fonts
+unzip ~/dl/CascadiaCode.zip -d ~/dl/fonts
 
 # Move the font files to the system fonts directory
-mv ~/Downloads/fonts ~/.local/share
+mv ~/dl/fonts ~/.local/share
 
 # Update the font cache
 fc-cache -f -v
 
 # Clean the zip file
-rm ~/Downloads/CascadiaCode.zip
+rm ~/dl/CascadiaCode.zip
 
 echo "Fonts installed successfully!"
