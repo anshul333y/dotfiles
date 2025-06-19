@@ -50,7 +50,7 @@
     },
 
     "custom/pacman-updates": {
-      "exec": "~/.local/bin/notify-pacman-updates",
+      "exec": "~/.local/bin/notify/notify-pacman-updates",
       "interval": 600,
       "return-type": "json",
       "format": "{}"
@@ -117,8 +117,8 @@
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
-        "on-scroll-up": "~/.local/bin/notify-brightness up",
-        "on-scroll-down": "~/.local/bin/notify-brightness down",
+        "on-scroll-up": "~/.local/bin/notify/notify-brightness up",
+        "on-scroll-down": "~/.local/bin/notify/notify-brightness down",
         "min-length": 6
     },
 
@@ -126,9 +126,9 @@
         "format": "{icon}  {volume}%",
         "tooltip": false,
         "format-muted": "  Muted",
-        "on-click": "~/.local/bin/notify-volume mute",
-        "on-scroll-up": "~/.local/bin/notify-volume up",
-        "on-scroll-down": "~/.local/bin/notify-volume down",
+        "on-click": "~/.local/bin/notify/notify-volume mute",
+        "on-scroll-up": "~/.local/bin/notify/notify-volume up",
+        "on-scroll-down": "~/.local/bin/notify/notify-volume down",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# anshul333y's wallhaven script
+
 # === Load environment variables from .env ===
 ENV_FILE="$(dirname "$0")/../.env"
 
