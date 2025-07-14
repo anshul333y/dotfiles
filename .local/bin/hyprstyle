@@ -82,7 +82,7 @@ yellow="$color3"
 accent="$mauve"
 accentAlpha="$mauveAlpha"
 
-font="CaskaydiaCove Nerd Font"
+font="Maple Mono NF CN"
 
 cat >"$HYPRLOCK_CONF" <<EOF
 # AUTO-GENERATED hyprlock.conf from hyprstyle
