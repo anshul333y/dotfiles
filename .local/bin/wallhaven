@@ -2,40 +2,17 @@
 
 # anshul333y's wallhaven script
 
-# === Load environment variables from .env ===
-ENV_FILE="$(dirname "$0")/../.env"
-
-if [ -f "$ENV_FILE" ]; then
-  set -a
-  source "$ENV_FILE"
-  set +a
-else
-  echo "❌ .env file not found. Please create one."
-fi
-
-API_KEY="$WALLHAVEN_API_KEY"
-
-if [ -z "$API_KEY" ]; then
-  echo "❌ WALLHAVEN_API_KEY not set in .env file."
-fi
-
-# === Config ===
 SAVE_DIR="$HOME/pics/save"
 WALLPAPER_DIR="$HOME/pics/wall"
 RESOLUTION="1920x1080"
 CATEGORIES="111" # General, Anime, and People
 PURITY="100"     # SFW only
 ORDER="desc"     # Default order
-MAX_PAGES=2
+MAX_PAGES=3
 
 # Prompt for sorting
 echo "Choose sorting option:"
-echo "1) random"
-echo "2) relevance"
-echo "3) date_added"
-echo "4) views"
-echo "5) favorites"
-echo "6) toplist"
+echo "1) random  2) relevance  3) date_added  4) views  5) favorites  6) toplist"
 
 read -p "Enter choice [1-6]: " sort_choice
 case "$sort_choice" in
