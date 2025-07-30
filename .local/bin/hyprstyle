@@ -2,30 +2,11 @@
 
 # anshul333y's hyprstyle script
 
-WALLPAPER_DIR="$HOME/pics/wall"
-
-# Use argument as wallpaper if provided, otherwise pick a random one
-if [ -n "$1" ]; then
-  WALLPAPER="$1"
-else
-  WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" \) | shuf -n 1)
-fi
-
-# Check if the wallpaper file exists
-if [ ! -f "$WALLPAPER" ]; then
-  echo "Wallpaper not found: $WALLPAPER"
-  exit 1
-fi
-
-# Pywal
-wal -i "$WALLPAPER" || {
-  echo "pywal failed"
-  exit 1
-}
+WALLPAPER="${1:-$(find "$HOME/pics/wall" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 1)}"
+wal -i "$WALLPAPER" 2>/dev/null
 
 # Hyprpaper
 CONFIG="$HOME/.config/hypr/hyprpaper.conf"
-
 cat >"$CONFIG" <<EOF
 # AUTO-GENERATED hyprpaper.conf from hyprstyle
 
@@ -33,44 +14,17 @@ preload = $WALLPAPER
 wallpaper = eDP-1,$WALLPAPER
 EOF
 
-pkill hyprpaper
-sleep 0.3
-nohup hyprpaper -c "$CONFIG" >/dev/null 2>&1 &
-
-# Waybar
-pkill waybar
-(sleep 0.5 && waybar) >/dev/null 2>&1 &
-
-# Hyprland
-HYPR_COLORS="$HOME/.config/hypr/hyprcolors.conf"
-
-source "$HOME/.cache/wal/colors.sh"
-
-ACTIVE_ALPHA="ff"
-INACTIVE_ALPHA="aa"
-ANGLE="45deg" # Angle for gradient
-
-active_hex="${color5#\#}${ACTIVE_ALPHA}"
-inactive_hex="${color8#\#}${INACTIVE_ALPHA}"
-
-ACTIVE_BORDER="rgba(${active_hex})"
-INACTIVE_BORDER="rgba(${inactive_hex})"
-
-cat >"$HYPR_COLORS" <<EOF
-# AUTO-GENERATED hyprcolors.conf from hyprstyle
-
-general {
-  col.active_border = $ACTIVE_BORDER $ACTIVE_BORDER $ANGLE
-  col.inactive_border = $INACTIVE_BORDER
-}
-EOF
-
+# Restart
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER"
+pkill waybar
+pkill hyprpaper
+hyprpaper &>/dev/null &
+waybar &>/dev/null &
 hyprctl reload
 
 # Hyprlock
 HYPRLOCK_CONF="$HOME/.config/hypr/hyprlock.conf"
-
 base="$color0"
 surface0="$color8"
 text="$color15"
@@ -81,9 +35,6 @@ red="$color1"
 yellow="$color3"
 accent="$mauve"
 accentAlpha="$mauveAlpha"
-
-font="Maple Mono NF CN"
-
 cat >"$HYPRLOCK_CONF" <<EOF
 # AUTO-GENERATED hyprlock.conf from hyprstyle
 
@@ -109,7 +60,7 @@ label {
     text = cmd[update:60000] date +"%I:%M %p"
     color = $text
     font_size = 90
-    font_family = $font
+    font_family = Maple Mono NF CN
     position = -30, 0
     halign = right
     valign = top
@@ -121,7 +72,7 @@ label {
     text = cmd[update:43200000] date +"%A, %d %B %Y"
     color = $text
     font_size = 35
-    font_family = $font
+    font_family = Maple Mono NF CN
     position = -30, -150
     halign = right
     valign = top
