@@ -74,17 +74,6 @@ window#waybar {
     border-radius: 10px;
 }
 
-#custom-wlogout {
-    background: rgba(0, 0, 0, 1);
-    padding: 0px 10px 0px 7px;
-    margin: 3px 0px;
-    margin-top: 5px;
-    margin-bottom: 0px;
-    color: @color4;
-    border-radius: 10px;
-    margin-left: 10px;
-}
-
 #custom-pacman-updates {
     padding: 0px 10px 0px 9px;
     margin: 3px 0px;

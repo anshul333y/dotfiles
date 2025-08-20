@@ -49,14 +49,6 @@
         "on-click": "activate"
     },
 
-    "custom/wlogout": {
-        "format": "⏻",
-        "tooltip": true,
-        "tooltip-format": "Logout",
-        "on-click": "wlogout",
-        "interval": 9999999
-    },
-
     "custom/pacman-updates": {
       "exec": "~/.local/bin/notify/notify-pacman-updates",
       "interval": 600,
