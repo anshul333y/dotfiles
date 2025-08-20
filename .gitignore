@@ -7,3 +7,5 @@
 
 # ignoring zsh system files
 .config/zsh/.zcompdump*
+
+.face
