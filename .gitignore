@@ -9,3 +9,4 @@
 .config/zsh/.zcompdump*
 
 .face
+.config/ncmpcpp/error.log
